@@ -1,9 +1,8 @@
+ruby "2.6.3"
 source "https://rubygems.org"
-
-# Specify your gem's dependencies in qg.gemspec
-gemspec
 
 group :development, :test do
   gem "byebug", platform: :mri
+  gem "rspec"
   gem "rspec_junit_formatter"
 end
