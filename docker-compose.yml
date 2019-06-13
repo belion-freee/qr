@@ -3,6 +3,6 @@ services:
   app:
     build: .
     volumes:
-      - .:/app
+      - .:/belion
     environment:
-      HOME: /app
+      HOME: /belion

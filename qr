@@ -24,6 +24,34 @@ echoing() {
     echo "========================================================"
 }
 
+compose_init() {
+    echoing "Building containers"
+    dir="app"
+    is_gem=false
+
+    arg=$1
+
+    if [[ $arg =~ --gem= ]]; then
+      echo "options $arg"
+      dir=${arg/--gem=/}
+      is_gem=true
+    fi
+
+    echo "dir is setting by $dir"
+    echo "is_gem is setting by $is_gem"
+
+    sed -i -e s/belion/$dir/g docker-compose.yml
+    rm docker-compose.yml-e
+    sed -i -e s/belion/$dir/g Dockerfile
+    rm Dockerfile-e
+
+    $dc build --no-cache
+
+    if "${is_gem}"; then
+      bundle_cmd gem . -t
+    fi
+}
+
 compose_up() {
     echoing "Create and start containers $*"
     $dc up -d "$1"
@@ -103,6 +131,9 @@ rubocop_cmd() {
 cmd=$1
 shift
 case "$cmd" in
+    init)
+        compose_init $* && exit 0
+        ;;
     ps)
         compose_ps && exit 0
         ;;

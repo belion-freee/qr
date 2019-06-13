@@ -14,8 +14,8 @@ EXPOSE 3000
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 
 # setting work directory
-RUN mkdir /app
-WORKDIR /app
-COPY . /app
+RUN mkdir /belion
+WORKDIR /belion
+COPY . /belion
 
 RUN gem install bundler && bundle install
