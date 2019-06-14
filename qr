@@ -48,7 +48,7 @@ compose_init() {
     $dc build --no-cache
 
     if "${is_gem}"; then
-      bundle_cmd gem . -t
+      bundle_cmd gem . -t --coc --mit
       $dc build
     fi
 }
