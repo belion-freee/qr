@@ -49,7 +49,6 @@ compose_init() {
 
     if "${is_gem}"; then
       bundle_cmd gem . -t --coc --mit
-      $dc build
     fi
 }
 
